@@ -1,24 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Toaster } from 'react-hot-toast';
+import { Provider } from 'react-redux';
+import store from './Redux/store';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import Chart from './pages/Chart';
+
+
+export interface IAllRoutes {
+  path: string;
+  element: React.ReactNode;
+}
+
+export const AllRoutes: IAllRoutes[] = [
+  {
+    path: `/`,
+    element: <HomePage />,
+  },
+  {
+    path: `/chart`,
+    element: <Chart />,
+  },
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen">
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route>
+              {AllRoutes && AllRoutes.map((route, index) => <Route key={index} path={route.path} element={route.element} />)}
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </div>
   );
 }
