@@ -56,8 +56,8 @@ function Chart() {
 
   return (
     <Layout>
-      <div className='bg-green-500 h-96 w-96 relative'>
-        <MapContainer  center={[18.786717, 72.359825]} zoom={13} className='absolute right-0 left-0'>
+      <div className=''>
+        <MapContainer  center={[18.786717, 72.359825]} zoom={13} className=''>
           <TileLayer  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {countriesData.map((country) => (
