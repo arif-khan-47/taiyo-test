@@ -6,7 +6,9 @@ import store from './Redux/store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Map from './pages/Map';
-import Chart from './pages/Chart';
+import ChartPage  from './pages/ChartPage';
+// import ChartPage from './pages/ChartPage';
+// import 'leaflet/dist/leaflet.css'
 
 
 export interface IAllRoutes {
@@ -21,7 +23,7 @@ export const AllRoutes: IAllRoutes[] = [
   },
   {
     path: `/chart`,
-    element: <Chart />,
+    element: <ChartPage />,
   },
   {
     path: `/map`,

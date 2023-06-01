@@ -16,7 +16,7 @@ const Sidebar = () => {
         icon: <BsMapFill className='h-5 w-5' />,
       },
       {
-        title: 'Cart',
+        title: 'Chart',
         path: '/chart',
         icon: <BsBarChartFill className='h-5 w-5' />,
       },
@@ -33,20 +33,22 @@ const Sidebar = () => {
               </Link>
             </div>
             <div className={`my-auto col-span-2 lg:col-span-5`}>
-              <ul className='py-5'>
-                {options.map((item, index) => (
-                  <Link key={index} to={item.path}>
-                    <li className={`flex hover:text-gray-600 my-3 lg:mb-2 py-2 gap-2 lg:pl-8 rounded-l-full`}>
+              <div className='py-5'>
+                {options.map((item,index) => (
+                  <>
+                  <Link to={item.path}>
+                    <div className={`flex hover:text-gray-600 my-3 lg:mb-2 py-2 gap-2 lg:pl-8 rounded-l-full`}>
                       <span className={`my-auto mx-auto lg:mx-0`}>
                         {item.icon}
                       </span>
                       <span className='lg:block hidden'>
                       {item.title}
                       </span>
-                    </li>
+                    </div>
                   </Link>
+                  </>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>

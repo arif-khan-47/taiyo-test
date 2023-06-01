@@ -64,7 +64,7 @@ function Map() {
               attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 
             />
-            {countriesData.map((country) => (
+            {countriesData && countriesData.length > 0 && countriesData.map((country) => (
               <Marker key={country.countryInfo._id} position={[country.countryInfo.lat, country.countryInfo.long]}>
                 <Popup>
                   <div className='font-bold text-lg'>{country.country}</div>
