@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaListUl } from 'react-icons/fa';
-import { BsBarChartFill } from 'react-icons/bs';
+import { BsBarChartFill, BsMapFill } from 'react-icons/bs';
 
 const Sidebar = () => {
 
@@ -11,7 +11,12 @@ const Sidebar = () => {
         icon: <FaListUl className='h-5 w-5' />,
       },
       {
-        title: 'Carts and maps',
+        title: 'Map',
+        path: '/map',
+        icon: <BsMapFill className='h-5 w-5' />,
+      },
+      {
+        title: 'Cart',
         path: '/chart',
         icon: <BsBarChartFill className='h-5 w-5' />,
       },

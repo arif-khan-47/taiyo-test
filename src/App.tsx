@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './Redux/store';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import Map from './pages/Map';
 import Chart from './pages/Chart';
 
 
@@ -21,6 +22,10 @@ export const AllRoutes: IAllRoutes[] = [
   {
     path: `/chart`,
     element: <Chart />,
+  },
+  {
+    path: `/map`,
+    element: <Map />,
   },
 ]
 

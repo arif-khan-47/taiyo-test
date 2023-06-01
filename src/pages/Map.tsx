@@ -44,7 +44,7 @@ const fetchCountriesData = async () => {
   return data;
 };
 
-function Chart() {
+function Map() {
 
   const { data: countriesData = [], isLoading, error } = useQuery<Country[]>('countries', fetchCountriesData);
 
@@ -58,13 +58,13 @@ function Chart() {
       {isLoading ? <div className='flex h-screen'><div className='m-auto'>Loading...</div></div>
         :
         <div className='h-screen w-full overflow-hidden'>
-          {/* <ChartContainer center={[21, 78]} zoom={4} className=''>
+          <MapContainer center={[21, 78]} zoom={4} className=''>
             <TileLayer
-              url="https://api.Charttiler.com/Charts/basic/256/{z}/{x}/{y}.png?key=9WFebKyo4SzKO0H6sXG3"
-              attribution='<a href="https://www.Charttiler.com/copyright/" target="_blank">&copy; ChartTiler</a> <a href="https://www.openstreetChart.org/copyright" target="_blank">&copy; OpenStreetChart contributors</a>'
+              url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=9WFebKyo4SzKO0H6sXG3"
+              attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 
             />
-            {countriesData.Chart((country) => (
+            {countriesData.map((country) => (
               <Marker key={country.countryInfo._id} position={[country.countryInfo.lat, country.countryInfo.long]}>
                 <Popup>
                   <div className='font-bold text-lg'>{country.country}</div>
@@ -74,7 +74,7 @@ function Chart() {
                 </Popup>
               </Marker>
             ))}
-          </ChartContainer> */}
+          </MapContainer>
         </div>
       }
 
@@ -82,4 +82,4 @@ function Chart() {
   )
 }
 
-export default Chart
+export default Map
