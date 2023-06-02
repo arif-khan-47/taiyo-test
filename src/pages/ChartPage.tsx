@@ -6,16 +6,31 @@ import { useQuery } from "react-query";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement)
 
 const ChartPage = () => {
+
   const fetchChartData = async () => {
     const response = await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=all');
     const data: any[] = await response.json();
     return data;
   };
 
+
+  const fetchAdditionalData = async () => {
+    const response = await fetch('https://disease.sh/v3/covid-19/all');
+    const data = await response.json();
+    return data;
+  };
+
+
+
   const { data: chartData = [], isLoading, error } = useQuery<any[]>('countries', fetchChartData);
 
+  const { data: additionalData = [], isLoading: additionalDataLoading, error: additionalDataError } = useQuery('additionalData', fetchAdditionalData);
+
+
+
+
   const formatChartData = (data: any) => {
-    if (!isLoading && data) {
+    if (data.cases != null && data.deaths != null && data.recovered != null) {
       const casesData = Object.entries(data?.cases).map(([date, value]) => ({ x: date, y: value }));
       const deathsData = Object.entries(data?.deaths).map(([date, value]) => ({ x: date, y: value }));
       const recoveredData = Object.entries(data?.recovered).map(([date, value]) => ({ x: date, y: value }));
@@ -47,7 +62,6 @@ const ChartPage = () => {
   let formattedData = null; // Declare formattedData variable
   if (!isLoading) {
     formattedData = formatChartData(chartData); // Store the value if not null or undefined
-    console.log(formattedData)
   }
   const options = {
     responsive: true,
@@ -62,16 +76,53 @@ const ChartPage = () => {
     },
   };
 
+
+
   return (
     <div>
       <Layout>
-        <div className="mt-20">
-          {formattedData !== null && formattedData !== undefined ? (
+        <div className="">
+          <div className="text-center font-bold text-xl italic mb-2 underline">World Wide Update</div>
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-1">
+            {additionalData.cases && <div><span className="font-bold">Total Cases:</span>{additionalData.cases}</div>}
+            {additionalData.deaths && <div><span className="font-bold">Total Deaths:</span>{additionalData.deaths}</div>}
+            {additionalData.recovered && <div><span className="font-bold">Total Recovered:</span>{additionalData.recovered}</div>}
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-1 mt-2">
+            {additionalData.todayCases && <div><span className="font-bold">Today Cases:</span>{additionalData.todayCases}</div>}
+            {additionalData.todayDeaths && <div><span className="font-bold">Today Deaths:</span>{additionalData.todayDeaths}</div>}
+            {additionalData.todayRecovered && <div><span className="font-bold">Today Recovered:</span>{additionalData.todayRecovered}</div>}
+          </div>
+        </div>
+
+
+        <div className="mt-5">
+          {formattedData !== null && formattedData !== undefined ? (<>
+            <div className="flex justify-center gap-3">
+              <div className="flex gap-1">
+                <div className="h-3 w-4 bg-red-500 my-auto" />
+                <span>Cases</span>
+              </div>
+
+              <div className="flex gap-1">
+                <div className="h-3 w-4 bg-yellow-300 my-auto" />
+                <span>Death</span>
+              </div>
+
+              <div className="flex gap-1">
+                <div className="h-3 w-4 bg-green-700 my-auto" />
+                <span>Recovered</span>
+              </div>
+              <div className="flex">
+              </div>
+            </div>
             <Line options={options} data={formattedData} />
+          </>
           ) : (
             <div className="h-screen flex"><div className=" m-auto">Loading chart data...</div></div>
           )}
         </div>
+
       </Layout>
     </div>
   );
