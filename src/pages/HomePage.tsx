@@ -37,7 +37,7 @@ function HomePage() {
                 tab === 'getuser' && (
                     <div className=''>
                         <div className='my-10 text-center'>
-                            <button className='border py-2 px-10 border-[#F0564F] font-semibold text-[#F0564F] hover:text-white hover:bg-[#F0564F] duration-700 hover:scale-105' onClick={() => setTab('createUser')}>Create Contact</button>
+                            <button className='border py-2 px-10 border-[#F0564F] font-semibold text-[#F0564F] hover:text-white hover:bg-[#F0564F] duration-700 hover:scale-105' onClick={() => setTab('createUser')}>Add Contact</button>
                         </div>
                         <div className=''>
                             {users.length === 0 ?
