@@ -119,7 +119,7 @@ const ChartPage = () => {
             <Line options={options} data={formattedData} />
           </>
           ) : (
-            <div className="h-screen flex"><div className=" m-auto">Loading chart data...</div></div>
+            <div className="text-center mx-auto">Loading chart data...</div>
           )}
         </div>
 
